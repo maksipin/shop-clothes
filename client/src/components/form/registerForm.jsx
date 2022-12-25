@@ -1,0 +1,125 @@
+import React, { useEffect, useState } from "react";
+import { validator } from "../../utils/validator";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getAuthErrors, getIsLoggedIn, signUp } from "../../store/users";
+
+const RegisterForm = () => {
+  const isLoggedIn = useSelector(getIsLoggedIn());
+  const loginError = useSelector(getAuthErrors());
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = ({ target }) => {
+    setData((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
+  const validatorConfog = {
+    email: {
+      isRequired: {
+        message: "Электронная почта обязательна для заполнения",
+      },
+      isEmail: {
+        message: "Email введен некорректно",
+      },
+    },
+    password: {
+      isRequired: {
+        message: "Пароль обязательна для заполнения",
+      },
+      isCapitalSymbol: {
+        message: "Пароль должен содержать хотя бы одну заглавную букву",
+      },
+      isContainDigit: {
+        message: "Пароль должен содержать хотя бы одно число",
+      },
+      min: {
+        message: "Пароль должен состаять миниму из 8 символов",
+        value: 8,
+      },
+    },
+  };
+  useEffect(() => {
+    validate();
+  }, [data]);
+  const validate = () => {
+    const errors = validator(data, validatorConfog);
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+  const isValid = Object.keys(errors).length === 0;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isValid = validate();
+    if (!isValid) return;
+    const newData = {
+      ...data,
+    };
+    dispatch(signUp(newData));
+  };
+  if (isLoggedIn) navigate("../../");
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label className="block">
+        <span className="text-amber-800">Электронная почта</span>
+        <input
+          type="email"
+          className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+          placeholder="john@example.com"
+          onChange={handleChange}
+          value={data.email}
+          error={errors.email}
+          name="email"
+        />
+      </label>
+      <div className="text-right text-red-600 font-normal text-sm">
+        {errors.email}
+      </div>
+      <label className="block">
+        <span className="text-amber-800">Пароль</span>
+        <input
+          type="password"
+          name="password"
+          value={data.password}
+          className=" mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+          onChange={handleChange}
+          error={errors.password}
+          placeholder="Введите пароль"
+        />
+      </label>
+      <div className="text-right text-red-600 font-normal text-sm">
+        {errors.password}
+      </div>
+      {loginError && (
+        <div className="text-right text-red-600 font-normal text-sm">
+          {loginError}
+        </div>
+      )}
+      <div className="mt-1 font-light text-sm">
+        <span> Уже зарегистрированы? </span>
+        <NavLink to="../">
+          <span className="hover:underline hover:text-amber-800">Войти</span>
+        </NavLink>
+      </div>
+      <button
+        type="submit"
+        disabled={!isValid}
+        className="mt-4 w-full p-2 bg-amber-800 mx-auto text-white opacity-70 hover:opacity-100"
+      >
+        Регистрация
+      </button>
+    </form>
+  );
+};
+
+export default RegisterForm;
