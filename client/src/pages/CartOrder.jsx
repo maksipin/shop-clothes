@@ -9,15 +9,15 @@ const CartOrder = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(updateQuantityProduct());
-    dispatch(loadProductsList());
     setTimeout(() => {
+      dispatch(updateQuantityProduct());
+      dispatch(loadProductsList());
       navigate("../../products");
     }, 3000);
   }, []);
 
   return (
-    <div className="m-auto">
+    <div className="m-auto mt">
       <div>Благодарим за заказ!</div>
       <div>Наш менеджер свяжется c вами в течении 30 минут</div>
     </div>

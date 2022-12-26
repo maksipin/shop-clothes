@@ -12,7 +12,7 @@ import {
   removeCartById,
   updateCartItem,
 } from "../store/cart";
-import { getProductsList } from "../store/products";
+import { getProductsList, getProductsLoadingStatus } from "../store/products";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,12 +22,13 @@ const ShoppingCartPage = () => {
   const dispatch = useDispatch();
   const cartProductsList = useSelector(getCart());
   const isLoadingCart = useSelector(getCartLoadingStatus());
+  const isLoadingproduct = useSelector(getProductsLoadingStatus());
   const products = useSelector(getProductsList());
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState({ quantity: 0, amount: 0 });
 
   useEffect(() => {
-    if (!isLoadingCart) {
+    if (!isLoadingCart && !isLoadingproduct) {
       const cart = cartProductsList.map((item) => {
         const product = products.find((prod) => prod._id === item.product_id);
         return {

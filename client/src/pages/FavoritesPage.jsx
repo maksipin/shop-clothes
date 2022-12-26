@@ -23,8 +23,6 @@ const FavoritePage = () => {
       <div className="mt-5 flex flex-wrap justify-center">
         {favoriteProducts.length > 0 ? (
           favoriteProducts.map((items, index) => {
-            console.log(index);
-            console.log(items[0]);
             return (
               <ProductCard
                 key={items._id}
