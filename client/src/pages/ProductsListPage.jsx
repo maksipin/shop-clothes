@@ -80,13 +80,6 @@ const ProductsListPage = () => {
     );
     setSortBy({ by: sortKey, direction: sortDirection });
   }
-
-  const handlePageChange = (pageIndex) => {
-    setCurrentPage(pageIndex);
-  };
-
-  const productsCrop = paginate(productsList, currentPage, pageSize);
-
   const scrollingTop = (event) => {
     window.scrollTo({
       top: 0,
@@ -94,31 +87,36 @@ const ProductsListPage = () => {
     });
   };
 
+  const handlePageChange = (pageIndex) => {
+    setCurrentPage(pageIndex);
+    scrollingTop();
+  };
+
+  const productsCrop = paginate(productsList, currentPage, pageSize);
+
   return (
     <div className="  m-auto mt-20  w-full h-full">
-      <div className="  mb-5 text-center text-3xl">
+      <div className="ml-10 text-center text-3xl hidden sm:block">
         {selectedType ? <h1>{selectedType.title}</h1> : <h1>Loading</h1>}
       </div>
-      <div className="flex justify-between  w-full">
+      <div className="flex justify-between flex-wrap w-full">
         <div className="">
-          <ul className="ml-2 mt-32 sticky top-1/3 ">
+          <ul className="ml-2 sm:sticky sm:top-1/3 sm:block flex flex-wrap justify-center border-b border-amber-800 sm:border-0 mb-4">
             {!isLoadingType &&
               type.map((item, index) => (
-                <NavLink key={index} to={`../${item.type}`}>
-                  <li
-                    onClick={scrollingTop}
-                    key={index}
-                    className="w-40 p-5 border-b text-center text-lg tracking-wider font-light border-b-amber-800 hover:text-amber-800 hover:-translate-y-1 duration-500"
-                  >
-                    {item.title}
-                  </li>
-                </NavLink>
+                <div className="sm:w-52 w-1/2 sm:p-5 p-2 sm:border-b  text-center sm:text-lg text-base tracking-wider font-light border-amber-800 sm:border-r-0 hover:text-amber-800 hover:-translate-y-1 duration-500">
+                  <NavLink key={index} to={`../${item.type}`}>
+                    <li onClick={scrollingTop} key={index}>
+                      {item.title}
+                    </li>
+                  </NavLink>
+                </div>
               ))}
           </ul>
         </div>
         <div className=" flex-auto flex flex-col px-5   w-3/4  border-l">
-          <div className="flex justify-between text-base font-normal ">
-            <div className="flex align-middle">
+          <div className="flex justify-between flex-wrap text-base font-normal ">
+            <div className="flex align-middle mb-4 sm:mb-0">
               <span> Сортировка:</span>
               {sort.map((item, index) => (
                 <div
@@ -142,14 +140,14 @@ const ProductsListPage = () => {
                 </div>
               ))}
             </div>
-            <div className=" ">
+            <div className="">
               <span className="mr-2">Показать на странице по</span>
               {[4, 8, 12].map((item, index) => (
                 <span
                   key={index}
                   onClick={onChangepageSize}
                   id={item}
-                  className={`text-base  px-2 hover:underline cursor-pointer ${
+                  className={`text-base  sm:px-2 px-4 hover:underline cursor-pointer ${
                     item === +pageSize
                       ? " text-amber-800 opacity-100 font-medium"
                       : "opacity-40"
@@ -158,13 +156,13 @@ const ProductsListPage = () => {
                   {item}
                 </span>
               ))}
-              <span className="ml-2"> в ряду по</span>
+              <span className="ml-2 hidden sm:inline-block"> в ряду по</span>
               {[2, 3, 4].map((item, index) => (
                 <span
                   key={index}
                   onClick={onChangeQuantityByRow}
                   id={item}
-                  className={`text-base px-2 hover:underline cursor-pointer ${
+                  className={`text-base px-2 hidden sm:inline-block hover:underline cursor-pointer ${
                     item === +quantityByRow
                       ? " text-amber-800 opacity-100 font-medium"
                       : "opacity-40"

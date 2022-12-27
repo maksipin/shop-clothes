@@ -80,11 +80,11 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="flex mt-20 mx-5">
-      <div className="w-3/4 mt-10">
-        <div className=" flex flex-wrap ">
+    <div className="flex sm:flex-row flex-col mt-20 mx-5">
+      <div className="sm:w-3/4 sm:mt-10">
+        <div className=" flex flex-wrap mb-5">
           {product.img.map((item) => (
-            <div className="flex-[0_0_50%] relative">
+            <div className="sm:flex-[0_0_50%] relative">
               <div className="">
                 <img
                   className="pl-1 pb-1 h-[85vh] w-full object-cover"
@@ -97,7 +97,7 @@ const ProductPage = () => {
           ))}
         </div>
       </div>
-      <div className="w-1/4 px-5">
+      <div className="sm:w-1/4 px-5">
         <div className="text-right align-middle ">
           <button
             className="px-5 py-2 w-2/4 font-semibold text-sm bg-amber-800 text-white rounded-none shadow-md opacity-80 hover:opacity-100"

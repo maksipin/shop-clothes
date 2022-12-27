@@ -61,12 +61,12 @@ const ProductCard = ({
 
   return (
     <div
-      className={`mb-5 p-1 border bg-white hover:scale-105 duration-700 hover:border-none hover:z-10  ${
+      className={`mb-5 w-full p-1 border bg-white hover:scale-105 duration-700 hover:border-none hover:z-10  ${
         quantityByRow === "2"
-          ? "w-1/2 "
+          ? "sm:w-1/2 "
           : quantityByRow === "3"
-          ? "w-1/3"
-          : "w-1/4 "
+          ? "sm:w-1/3"
+          : "sm:w-1/4 "
       }`}
     >
       <div className="">

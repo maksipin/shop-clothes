@@ -3,9 +3,9 @@ const { Schema, model } = require("mongoose");
 const schema = new Schema(
   {
     type_id: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "TypeProduct",
     },
-
     article: {
       type: String,
     },

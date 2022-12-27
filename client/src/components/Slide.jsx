@@ -15,8 +15,8 @@ const Slide = () => {
         />
       </div>
       <div className="relative flex justify-center">
-        <div className="absolute top-1/2 border-t-2 border-orange-900 w-full z-0"></div>
-        <p className="p-6 pt-4 text-center text-4xl text-orange-900 tracking-widest font-thin align-middle bg-white z-10">
+        <div className="absolute top-1/2 sm:border-t-2 border-t border-orange-900 w-full z-0"></div>
+        <p className="p-6 pt-4 text-center sm:text-4xl text-xl text-orange-900 tracking-widest sm:font-thin font-extralight align-middle bg-white z-10">
           Найди свой образ
         </p>
         <div className="absolute top-1/2 border-t-2 border-orange-900 w-full z-0"></div>

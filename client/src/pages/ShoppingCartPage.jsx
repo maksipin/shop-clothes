@@ -88,7 +88,7 @@ const ShoppingCartPage = () => {
   };
 
   return (
-    <div className="mx-5 mt-32 flex">
+    <div className="mx-5 mt-20 sm:flex-row flex flex-col-reverse mb-10">
       <div className="w-full border-b border-amber-900 ">
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => {
@@ -108,8 +108,8 @@ const ShoppingCartPage = () => {
           </div>
         )}
       </div>
-      <div className="ml-10 w-2/6">
-        <div className="text-right ">
+      <div className="sm:ml-10 sm:w-2/6">
+        <div className="sm:text-right ">
           <div className="flex justify-between mb-2">
             <span className="block text-lg">Количество:</span>
             <span className="text-xl after:content-['шт.'] after:pl-1 after:font-medium">
@@ -123,9 +123,10 @@ const ShoppingCartPage = () => {
             </span>
           </div>
         </div>
-        <div className="text-right mx-auto mt-5 w-52">
+        <div className="text-right mx-auto my-5 w-52">
           <button
             onClick={onOrderButton}
+            disabled={total.quantity === 0}
             className=" px-2 py-2 w-full font-semibold text-sm bg-amber-800 text-white  shadow-md opacity-80 hover:opacity-100"
           >
             Заказать

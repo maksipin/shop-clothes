@@ -8,7 +8,7 @@ const SectionCard = ({ to, img, description, title }) => {
   const styleImg = "" + process.env.REACT_APP_API_URL + img;
 
   return (
-    <div className="w-1/4 pr-[1px] h-[40vh] min-w-250px  relative  justify-center items-center  ">
+    <div className="w-1/4 pr-[1px] h-[50vh] min-w-250px  relative  justify-center items-center  pb-[2px]">
       {/* container */}
       <NavLink to={to}>
         <div className=" relative group   overflow-hidden shadow-lg  flex justify-center items-center h-full">

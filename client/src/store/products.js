@@ -54,7 +54,6 @@ export const addProduct = (product) => async (dispatch) => {
   }
 };
 export const updateQuantityProduct = () => async (dispatch) => {
-  dispatch(productsRequested());
   try {
     await productService.updateQuantity();
   } catch (error) {

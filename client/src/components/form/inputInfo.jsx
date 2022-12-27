@@ -2,8 +2,8 @@ import React from "react";
 
 const InputInfo = ({ name, title, id, value, onChange, onBlur }) => {
   return (
-    <label className="block m-2  mt-0">
-      <span className="text-amber-900 text-lg">{title}</span>
+    <label className="block m-2  sm:mt-0 text-center">
+      <span className=" text-amber-900 text-lg">{title}</span>
       <input
         type="text"
         value={value}

@@ -5,18 +5,18 @@ const Footer = () => {
   return (
     <footer className="bg-amber-800 text-white font-light opacity-80">
       <hr />
-      <div className="m-auto flex justify-between grow-0 max-w-screen-2xl">
+      <div className="m-auto sm:flex justify-between flex-wrap grow-0 max-w-screen-2xl">
         {/* О компании */}
-        <div className="m-5 mx-10">
+        <div className="m-5 mx-10 text-center sm:text-left">
           <h1 className="text-xl mb-2">О компании</h1>
           <h3 className="text-sm cursor-pointer">О нас</h3>
           <h3 className="text-sm cursor-pointer">Контакты</h3>
         </div>
         {/* Покупателям  */}
-        <div className="m-5 ">
+        <div className="m-5 text-center">
           <h1 className="text-xl mb-2 text-center">Покупателям</h1>
-          <div className=" ml-10 flex text-sm flex-wrap justify-between ">
-            <div className="mx-5">
+          <div className=" sm:ml-10 flex text-sm flex-wrap justify-center sm:justify-between text-center">
+            <div className="mx-5 ">
               <h3 className="cursor-pointer">Магазины</h3>
               <h3 className="cursor-pointer">Доставка</h3>
               <h3 className="cursor-pointer">Оплата</h3>
@@ -29,10 +29,10 @@ const Footer = () => {
           </div>
         </div>
         {/* Контакты  */}
-        <div className="m-5 mx-10">
+        <div className="m-5 mx-10 text-center">
           <h1 className="text-xl  mb-2">Контактный телефон:</h1>
           <h2 className="text-xl mb-2 cursor-pointer">8 800 800 00 00</h2>
-          <div className=" flex ">
+          <div className="flex justify-center">
             <UsersIcon className="w-8 mx-2 cursor-pointer" />
             <PaperAirplaneIcon className="w-8 mx-2 cursor-pointer" />
           </div>

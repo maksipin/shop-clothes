@@ -6,9 +6,9 @@ import AppLoader from "./layout/AppLoader";
 function App() {
   console.log("App main render");
   return (
-    <div className=" relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen ">
       <NavBar />
-      <div className=" m-auto max-w-screen-2xl w-full flex-auto items-center">
+      <div className="m-auto max-w-screen-2xl flex-auto w-full items-center">
         <AppLoader>
           <AppRouter />
         </AppLoader>

@@ -42,22 +42,12 @@ router.post("/", async (req, res) => {
     });
   }
 });
-router.patch("/:productId", async (req, res) => {
+router.patch("/quantity/", auth, async (req, res) => {
+  const userId = req.user._id;
+  console.log("id", userId);
   try {
-    const { productId } = req.params;
-    await Product.findByIdAndUpdate(productId, req.body);
-    res.send(null);
-  } catch (e) {
-    console.log(chalk.red(e.message));
-    res.status(500).json({
-      message: "На сервере произошла ошибка. Попробуйте позже",
-    });
-  }
-});
-router.patch("/quantity", auth, async (req, res) => {
-  try {
-    const user_id = req.user._id;
-    const list = await CartProduct.find({ user_id: { $eq: user_id } });
+    const list = await CartProduct.find({ user_id: { $eq: userId } });
+    console.log("cart", list);
     list.forEach(async (cartItem) => {
       const product = await Product.findById(cartItem.product_id);
       product.feature.forEach((item) => {
@@ -67,10 +57,12 @@ router.patch("/quantity", auth, async (req, res) => {
         )
           item = { ...item, quantity: cartItem.feature.quantity };
       });
-      await Product.findByIdAndUpdate(cartProductId, { ...product });
+      await Product.findByIdAndUpdate(cartItem.product_id, { ...product });
+      await CartProduct.findOneAndDelete({ user_id: { $eq: userId } });
     });
     res.send(null);
   } catch (e) {
+    console.log("e", e.message);
     res.status(500).json({
       message: "На сервере произошла ошибка. Попробуйте позже",
     });
@@ -88,6 +80,18 @@ router.patch("/img/:productId", async (req, res) => {
       img: product.img,
     });
     res.send(product.img);
+  } catch (e) {
+    console.log(chalk.red(e.message));
+    res.status(500).json({
+      message: "На сервере произошла ошибка. Попробуйте позже",
+    });
+  }
+});
+router.patch("/:productId", async (req, res) => {
+  try {
+    const { productId } = req.params;
+    await Product.findByIdAndUpdate(productId, req.body);
+    res.send(null);
   } catch (e) {
     console.log(chalk.red(e.message));
     res.status(500).json({
