@@ -4,7 +4,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const config = require("config");
 const chalk = require("chalk");
-const initDatabase = require("./startUp/initDatabase");
+
 const routes = require("./routes");
 const path = require("path");
 
@@ -37,9 +37,7 @@ app.get("*", (req, res) => {
 
 async function start() {
   try {
-    mongoose.connection.once("open", () => {
-      // initDatabase();
-    });
+    mongoose.connection.once("open", () => {});
     await mongoose.connect(config.get("mongoUri"));
     console.log(chalk.green("MongoDB connected"));
     app.listen(PORT, () =>
