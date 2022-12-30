@@ -5,8 +5,9 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getCurrentAuth, getIsLoggedIn } from "../../store/users";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { getUserId } from "../../services/localStorage.service";
 
 const NavBar = () => {
   const logedIn = useSelector(getIsLoggedIn());
@@ -16,8 +17,8 @@ const NavBar = () => {
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
         <>
-          <div className="relative w-screen sm:fixed top-0 left-0 right-0 border-b border-amber-800 font-navlink text-xs font-medium bg-white bg-opacity-80 z-40 ">
-            <div className="m-auto px-2 h-16  max-w-screen-2xl">
+          <div className="relative w-screen sm:fixed top-0 left-0 right-0 border-b shadow-md border-amber-800 font-navlink text-xs font-medium bg-white bg-opacity-80 z-40 ">
+            <div className="m-auto px-2 h-14  max-w-screen-2xl">
               <div className="absolute inset-y-0 left-0 m-auto flex justify-between w-full items-center lg:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -59,7 +60,7 @@ const NavBar = () => {
               </div>
               <div className="hidden  lg:block">
                 <div className="flex flex-row justify-between items-center">
-                  <div className=" flex justify-start m-1 basis-1/3">
+                  <div className="flex justify-start m-1 basis-1/3 ">
                     <NavLink to="../../../">
                       <div className="mx-2 p-1 hover:text-amber-800  hover:-translate-y-1 transition-transform cursor-pointer duration-300 ">
                         Главная

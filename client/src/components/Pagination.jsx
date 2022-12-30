@@ -15,8 +15,9 @@ const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
           className="isolate inline-flex -space-x-px rounded-md shadow-sm"
           aria-label="Pagination"
         >
-          {pages.map((page) => (
+          {pages.map((page, index) => (
             <a
+              key={index}
               aria-current="page"
               className={`relative z-10 inline-flex items-center border hover:bg-stone-200 ${
                 page === currentPage

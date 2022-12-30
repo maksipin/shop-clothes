@@ -4,7 +4,7 @@ const Slide = () => {
   return (
     <div>
       {" "}
-      <div className="m-auto flex justify-center max-h-600 pt-16 ">
+      <div className="m-auto flex justify-center max-h-600 sm:pt-16 ">
         <img
           className="object-cover"
           src={

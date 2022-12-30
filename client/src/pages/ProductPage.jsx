@@ -8,9 +8,11 @@ import { getProductById } from "../store/products";
 import { onChangeFavorite } from "../utils/changeFavorite";
 import { getFavoriteById, getIsFavorite } from "../store/favorite";
 import { getUserId } from "../services/localStorage.service";
-import { addCartItem, getCart, getIsProductInCart } from "../store/cart";
-import { ToastContainer, toast } from "react-toastify";
+import { addCartItem, getIsProductInCart } from "../store/cart";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import ShowProductImages from "../components/ShowProductImages";
 
 const ProductPage = () => {
   const { productId } = useParams();
@@ -40,6 +42,10 @@ const ProductPage = () => {
   const isChosenProduct =
     selectFeature.size !== "" && selectFeature.color.name !== "";
 
+  useEffect(() => {
+    scrollingTop();
+  }, []);
+
   const onSelectSize = (size) => {
     setSelectFeature((prevState) => ({
       ...prevState,
@@ -58,6 +64,13 @@ const ProductPage = () => {
             ? { name: "", code: "" }
             : colorItem.color,
       };
+    });
+  };
+
+  const scrollingTop = (event) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
     });
   };
 
@@ -80,23 +93,8 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="flex sm:flex-row flex-col mt-20 mx-5">
-      <div className="sm:w-3/4 sm:mt-10">
-        <div className=" flex flex-wrap mb-5">
-          {product.img.map((item) => (
-            <div className="sm:flex-[0_0_50%] relative">
-              <div className="">
-                <img
-                  className="pl-1 pb-1 h-[85vh] w-full object-cover"
-                  loading="lazy"
-                  src={process.env.REACT_APP_API_URL + item}
-                  alt=""
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="flex sm:flex-row flex-col sm:mt-20 mx-5">
+      <ShowProductImages img={product.img} />
       <div className="sm:w-1/4 px-5">
         <div className="text-right align-middle ">
           <button
@@ -111,7 +109,7 @@ const ProductPage = () => {
         </div>
         <div className=" my-4 text-lg font-light text-left ">
           <span>Артикул: </span>
-          <span className=" my-4 text-xl font-normal "> {product.article}</span>
+          <span className=" my-4  font-normal "> {product.article}</span>
         </div>
         <div className="flex justify-between">
           <div className=" my-4 text-2xl text-right after:content-['\20BD'] after:pl-1 after:font-medium ">
@@ -175,25 +173,13 @@ const ProductPage = () => {
           </button>
         </div>
         {product.description &&
-          product.description.map((item) => (
-            <div className="mb-10">
+          product.description.map((item, index) => (
+            <div key={index} className="mb-10">
               <h3 className="font-bold text-base">{item.title}</h3>
               <span>{item.text}</span>
             </div>
           ))}
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 };

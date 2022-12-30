@@ -109,11 +109,13 @@ const ProductCard = ({
                 </div>
                 <div className="flex items-center basis-1/3 justify-center">
                   {color.map((item, index) => (
-                    <div className="border-l first:border-none border-amber-800">
+                    <div
+                      key={index}
+                      className="border-l first:border-none border-amber-800"
+                    >
                       <div
                         className={`m-1 w-3 h-3  border border-gray-500 rounded-full shadow-md bg-[${item}]`}
                         style={{ backgroundColor: item }}
-                        key={index}
                       ></div>
                     </div>
                   ))}

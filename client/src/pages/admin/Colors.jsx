@@ -46,7 +46,6 @@ const Colors = () => {
     setNewColor(arr);
   };
   const saveColor = (value) => {
-    console.log("val", value);
     dispatch(addColor(value)).then((data) => setNewColor([]));
   };
 

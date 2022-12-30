@@ -13,6 +13,7 @@ import { getUserId } from "../services/localStorage.service";
 import { loadFavoritesList } from "../store/favorite";
 import Pagination from "../components/Pagination";
 import { paginate } from "../utils/paginate";
+import SectionMenu from "../components/SectionMenu";
 
 const ProductsListPage = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const ProductsListPage = () => {
     sortedBy(target.id);
   };
   function sortedBy(sortKey) {
+    console.log("Sort");
     if (!sortKey) return;
     const sortDirection =
       sortKey === sortBy.by
@@ -95,25 +97,12 @@ const ProductsListPage = () => {
   const productsCrop = paginate(productsList, currentPage, pageSize);
 
   return (
-    <div className="  m-auto mt-20  w-full h-full">
+    <div className="  m-auto sm:mt-20 mt-4 w-full h-full">
       <div className="ml-10 text-center text-3xl hidden sm:block">
         {selectedType ? <h1>{selectedType.title}</h1> : <h1>Loading</h1>}
       </div>
       <div className="flex justify-between flex-wrap w-full">
-        <div className="">
-          <ul className="ml-2 sm:sticky sm:top-1/3 sm:block flex flex-wrap justify-center border-b border-amber-800 sm:border-0 mb-4">
-            {!isLoadingType &&
-              type.map((item, index) => (
-                <div className="sm:w-52 w-1/2 sm:p-5 p-2 sm:border-b  text-center sm:text-lg text-base tracking-wider font-light border-amber-800 sm:border-r-0 hover:text-amber-800 hover:-translate-y-1 duration-500">
-                  <NavLink key={index} to={`../${item.type}`}>
-                    <li onClick={scrollingTop} key={index}>
-                      {item.title}
-                    </li>
-                  </NavLink>
-                </div>
-              ))}
-          </ul>
-        </div>
+        {!isLoadingType && <SectionMenu type={type} />}
         <div className=" flex-auto flex flex-col px-5   w-3/4  border-l">
           <div className="flex justify-between flex-wrap text-base font-normal ">
             <div className="flex align-middle mb-4 sm:mb-0">

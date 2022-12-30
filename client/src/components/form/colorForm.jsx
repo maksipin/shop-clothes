@@ -7,12 +7,11 @@ const ColorForm = ({ saveColor, remove }) => {
   let colorName;
   const onChange = ({ target }) => {
     colorName = { ...colorName, [target.name]: target.value };
-    console.log(colorName);
   };
 
   const onSave = () => {
     // console.log(name, color);
-    saveColor({ ...colorName });
+    if (colorName.name && colorName.color) saveColor({ ...colorName });
   };
   return (
     <div className="flex flex-col justify-start  border-b border-amber-800 mx-5 ">

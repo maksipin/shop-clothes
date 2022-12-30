@@ -57,6 +57,7 @@ http.interceptors.response.use(
       error.response &&
       error.response.status >= 400 &&
       error.response.status < 500;
+    if (error.response.status === 401) localStorageService.removeAuthData();
 
     if (!expectedErrors) {
       console.log(error);

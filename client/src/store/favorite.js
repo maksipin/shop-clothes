@@ -91,8 +91,9 @@ export const addFavoritesById = (favorite) => async (dispatch) => {
   }
 };
 export const updateFavoritesList = () => async (dispatch) => {
-  dispatch(favoritesRequested());
   const favorites = getFavoritesFromLocalStorage();
+  if (!favorites) return;
+  dispatch(favoritesRequested());
   try {
     await favoriteService.update(favorites);
     localStorageService.removeFavoritesFromLocalStorage();

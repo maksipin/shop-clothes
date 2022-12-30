@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { Circles } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import { getUserId } from "../services/localStorage.service";
 import { loadCartList } from "../store/cart";
 import { getColorsLoadingStatus, loadColorsList } from "../store/color";
@@ -13,6 +14,7 @@ import { getTypesLoadingStatus, loadTypeList } from "../store/type";
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const userId = getUserId();
+  console.log("userId", userId);
 
   useEffect(() => {
     dispatch(loadProductsList());
@@ -20,7 +22,9 @@ const AppLoader = ({ children }) => {
     dispatch(loadColorsList());
     dispatch(loadSizesList());
     dispatch(loadFavoritesList(userId));
-    dispatch(loadCartList());
+    if (userId) {
+      dispatch(loadCartList());
+    }
   }, []);
   console.log("App loader render");
   const isLoadingProduct = useSelector(getProductsLoadingStatus());
@@ -49,6 +53,18 @@ const AppLoader = ({ children }) => {
           />
         </div>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

@@ -10,11 +10,11 @@ const Sizes = () => {
   const [newSize, setNewSize] = useState();
 
   const onChange = ({ target }) => {
-    setNewSize(target.value);
+    if (target.value) setNewSize(target.value);
   };
 
   const onSave = () => {
-    dispatch(addSize({ size: newSize }));
+    if (newSize) dispatch(addSize({ size: newSize }));
   };
   const removeSize = (id) => {
     dispatch(removeSizesById(id));
