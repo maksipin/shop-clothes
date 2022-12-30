@@ -27,13 +27,13 @@ const PORT = config.get("port") ?? 8080;
 //   console.log("development");
 // }
 
-if (process.env.NODE_ENV === "production") {
-  app.use("/", express.static(path.join(__dirname, "client")));
-  const indexPath = path.join(__dirname, "client", "index.html");
-  app.get("*", (req, res) => {
-    res.sendFile(indexPath);
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+app.use("/", express.static(path.join(__dirname, "client")));
+const indexPath = path.join(__dirname, "client", "index.html");
+app.get("*", (req, res) => {
+  res.sendFile(indexPath);
+});
+// }
 
 async function start() {
   try {
