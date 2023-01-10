@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { HeartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getFavoriteById, getIsFavorite } from "../store/favorite";
-import { getUserId } from "../services/localStorage.service";
+import { getFavoriteById } from "../store/favorite";
 import { onChangeFavorite } from "../utils/changeFavorite";
 
 const ProductCard = ({
@@ -19,10 +18,7 @@ const ProductCard = ({
   link,
 }) => {
   const dispatch = useDispatch();
-  const isFavorite = useSelector(getIsFavorite(_id));
   const favorite = useSelector(getFavoriteById(_id));
-  const [slide, setSlide] = useState(0);
-  const [items, setItems] = useState([]);
   const size = feature.reduce((sizes, item) => {
     if (!sizes.includes(item.size)) sizes.push(item.size);
     return sizes;
@@ -35,29 +31,6 @@ const ProductCard = ({
   const bgImage = {
     backgroundImage: "url(" + process.env.REACT_APP_API_URL + img[0] + ")",
   };
-
-  const changeSlide = (direction = 1) => {
-    let slideNumber = 0;
-    if (slide + direction < 0) {
-      slideNumber = items.length - 1;
-    } else {
-      slideNumber = (slide + direction) % items.length;
-    }
-    setSlide(slideNumber);
-  };
-
-  useEffect(() => {
-    setItems(img);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      changeSlide(1);
-    }, 9000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [items.length, slide]);
 
   return (
     <div
@@ -77,18 +50,14 @@ const ProductCard = ({
                 onClick={() => onAction(_id)}
                 className="text-white hover:text-amber-800 h-7 w-7 z-10 cursor-pointer rotate-90  hover:rotate-180 duration-300"
               />
-            ) : isFavorite ? (
+            ) : favorite ? (
               <HeartSolidIcon
-                onClick={() =>
-                  onChangeFavorite(_id, dispatch, isFavorite, favorite)
-                }
+                onClick={() => onChangeFavorite(_id, dispatch, favorite)}
                 className="text-white hover:text-amber-800 h-7 w-7 z-10 cursor-pointer rotate-0  hover:rotate-12 duration-300"
               />
             ) : (
               <HeartIcon
-                onClick={() =>
-                  onChangeFavorite(_id, dispatch, isFavorite, favorite)
-                }
+                onClick={() => onChangeFavorite(_id, dispatch, favorite)}
                 className="text-white hover:text-amber-800 h-7 w-7 z-10 cursor-pointer rotate-0  hover:rotate-12 duration-300"
               />
             )}
@@ -139,4 +108,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);

@@ -2,9 +2,8 @@ import React from "react";
 
 const Slide = () => {
   return (
-    <div>
-      {" "}
-      <div className="m-auto flex justify-center max-h-600 sm:pt-16 ">
+    <>
+      <div className="m-auto flex justify-center max-h-600 sm:pt-14 ">
         <img
           className="object-cover"
           src={
@@ -15,13 +14,13 @@ const Slide = () => {
         />
       </div>
       <div className="relative flex justify-center">
-        <div className="absolute top-1/2 sm:border-t-2 border-t border-orange-900 w-full z-0"></div>
-        <p className="p-6 pt-4 text-center sm:text-4xl text-xl text-orange-900 tracking-widest sm:font-thin font-extralight align-middle bg-white z-10">
+        <div className="absolute top-1/2 sm:border-t-2 border-t border-amber-900 w-full z-0"></div>
+        <p className="p-6 pt-4 text-center sm:text-4xl text-xl text-amber-900 tracking-widest sm:font-thin font-extralight align-middle bg-white z-10">
           Найди свой образ
         </p>
-        <div className="absolute top-1/2 border-t-2 border-orange-900 w-full z-0"></div>
+        <div className="absolute top-1/2 border-t-2 border-amber-900 w-full z-0"></div>
       </div>
-    </div>
+    </>
   );
 };
 

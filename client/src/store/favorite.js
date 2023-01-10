@@ -106,7 +106,7 @@ export const getIsFavorite = (id) => (state) => {
   return state.favorite.entities.find((item) => item.product_id === id);
 };
 export const getFavoriteById = (id) => (state) => {
-  return state.favorite.entities.filter((item) => item.product_id === id)[0];
+  return state.favorite.entities.find((item) => item.product_id === id);
 };
 export const getFavoritesList = () => (state) => state.favorite.entities;
 export const getFavoritesIsLoading = () => (state) => state.favorite.isLoading;

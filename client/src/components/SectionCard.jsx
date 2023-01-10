@@ -1,6 +1,6 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SectionCard = ({ to, img, description, title }) => {
   const { ref, inView, entry } = useInView({
@@ -10,7 +10,7 @@ const SectionCard = ({ to, img, description, title }) => {
   return (
     <div
       ref={ref}
-      className="w-1/4 pr-[1px] h-[50vh] min-w-250px  relative  justify-center items-center  pb-[2px]"
+      className="w-1/4 pr-[1px] sm:h-[50vh] min-w-250px max-w-4xl relative  justify-center items-center  pb-[2px] sm:flex-[1_1_300px]"
     >
       {/* container */}
       <NavLink to={to}>
@@ -21,8 +21,6 @@ const SectionCard = ({ to, img, description, title }) => {
             src={`${process.env.REACT_APP_API_URL + img}`}
             alt=""
           />
-
-          {/* </div> */}
           <div
             className={`absolute ${
               inView ? "bottom-0" : "-bottom-1/2"
@@ -49,4 +47,4 @@ const SectionCard = ({ to, img, description, title }) => {
   );
 };
 
-export default SectionCard;
+export default React.memo(SectionCard);

@@ -6,7 +6,7 @@ import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../store/products";
 import { onChangeFavorite } from "../utils/changeFavorite";
-import { getFavoriteById, getIsFavorite } from "../store/favorite";
+import { getFavoriteById } from "../store/favorite";
 import { getUserId } from "../services/localStorage.service";
 import { addCartItem, getIsProductInCart } from "../store/cart";
 import { toast } from "react-toastify";
@@ -17,7 +17,6 @@ import ShowProductImages from "../components/ShowProductImages";
 const ProductPage = () => {
   const { productId } = useParams();
   const userId = getUserId();
-  const isFavorite = useSelector(getIsFavorite(productId));
   const favorite = useSelector(getFavoriteById(productId));
   const dispatch = useDispatch();
   const product = useSelector(getProductById(productId));
@@ -160,12 +159,10 @@ const ProductPage = () => {
             Добавить в корзину
           </button>
           <button
-            onClick={() =>
-              onChangeFavorite(productId, dispatch, isFavorite, favorite)
-            }
+            onClick={() => onChangeFavorite(productId, dispatch, favorite)}
             className="ml-2 px-2 py-2 w-1/8 font-normal text-sm bg-amber-800 text-white  shadow-md opacity-80 hover:opacity-100"
           >
-            {isFavorite ? (
+            {favorite ? (
               <HeartSolidIcon className="m-auto w-7 " />
             ) : (
               <HeartIcon className="m-auto w-7 " />

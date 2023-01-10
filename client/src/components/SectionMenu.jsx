@@ -28,4 +28,4 @@ const SectionMenu = ({ type }) => {
   );
 };
 
-export default SectionMenu;
+export default React.memo(SectionMenu);
