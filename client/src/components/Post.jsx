@@ -1,5 +1,8 @@
 import React from "react";
+import {useSelector} from "react-redux";
+import {getUrl} from "../store/users";
 const Post = () => {
+  const url = useSelector(getUrl())
   return (
     <div>
       <div className="sm:px-8 my-16 sm:mt-32">
@@ -13,7 +16,7 @@ const Post = () => {
                       alt=""
                       sizes="(min-width: 1024px) 32rem, 20rem"
                       src={
-                        process.env.REACT_APP_API_URL +
+                        url +
                         "1c343fc7-9b16-486a-85b6-a67bf1338101.jpg"
                       }
                       width="800"

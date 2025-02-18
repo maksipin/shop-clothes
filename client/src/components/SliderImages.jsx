@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import {useSelector} from "react-redux";
+import {getUrl} from "../store/users";
 
 const SliderImages = ({ images }) => {
+    const url = useSelector(getUrl())
   return (
     <>
       <div className="relative w-full flex gap-6 snap-x snap-mandatory overflow-auto pb-4">
@@ -11,7 +14,7 @@ const SliderImages = ({ images }) => {
               className="h-full w-[90vw] object-cover shadow-md transition-transform duration-700"
               // style={{ transform: value }}
               loading="lazy"
-              src={process.env.REACT_APP_API_URL + img}
+              src={url + img}
               alt="image"
             />
           </div>

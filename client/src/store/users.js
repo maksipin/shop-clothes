@@ -12,6 +12,7 @@ const initialState = localStorageService.getAccessToken()
       auth: { userId: localStorageService.getUserId() },
       isLoggedIn: true,
       dataLoaded: false,
+      url: ''
     }
   : {
       entities: null,
@@ -20,6 +21,7 @@ const initialState = localStorageService.getAccessToken()
       auth: null,
       isLoggedIn: false,
       dataLoaded: false,
+      url: ''
     };
 
 const usersSlice = createSlice({
@@ -62,6 +64,10 @@ const usersSlice = createSlice({
     authRequested: (state) => {
       state.error = null;
     },
+    setUrl: (state, action) => {
+      console.log(action.payload)
+      state.url = action.payload
+    }
   },
 });
 
@@ -74,11 +80,17 @@ const {
   authRequestSuccess,
   userLoggedOut,
   userUpdateSuccessed,
+  setUrl
 } = actions;
 
 const authRequested = createAction("users/authRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
+
+export const setUrlAction = (url) => (dispatch) => {
+  console.log({url})
+  dispatch(setUrl(url))
+}
 
 export const login =
   ({ payload, redirect }) =>
@@ -156,4 +168,5 @@ export const getDataStatus = () => (state) => state.users.dataLoaded;
 export const getUsersLoadingStatus = () => (state) => state.users.isLoading;
 export const getCurrentAuth = () => (state) => state.users.auth;
 export const getAuthErrors = () => (state) => state.users.error;
+export const getUrl = () => (state) => state.users.url;
 export default usersReducer;

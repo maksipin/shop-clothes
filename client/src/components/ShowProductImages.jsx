@@ -1,7 +1,10 @@
 import React from "react";
 import SliderImages from "./SliderImages";
+import {useSelector} from "react-redux";
+import {getUrl} from "../store/users";
 
 const ShowProductImages = ({ img }) => {
+    const url = useSelector(getUrl())
   return (
     <>
       <div className="sm:w-3/4 sm:mt-10">
@@ -17,7 +20,7 @@ const ShowProductImages = ({ img }) => {
               <img
                 className="pl-1 pb-1 h-[85vh] w-full object-cover"
                 loading="lazy"
-                src={process.env.REACT_APP_API_URL + item}
+                src={url + item}
                 alt=""
               />
             </div>

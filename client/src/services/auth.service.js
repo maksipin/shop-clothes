@@ -2,8 +2,10 @@ import axios from "axios";
 import localStorageService from "./localStorage.service";
 import config from "../config.json";
 
+const url = window.location.protocol + '//' + window.location.hostname + '/api'
+
 const httpAuth = axios.create({
-    baseURL: config.apiEndpoint + "/auth/",
+    baseURL: url + "/auth/",
     params: {
         key: process.env.REACT_APP_FIREBASE_KEY
     }

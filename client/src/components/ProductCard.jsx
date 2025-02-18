@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavoriteById } from "../store/favorite";
 import { onChangeFavorite } from "../utils/changeFavorite";
+import {getUrl} from "../store/users";
 
 const ProductCard = ({
   quantityByRow,
@@ -17,6 +18,7 @@ const ProductCard = ({
   onAction,
   link,
 }) => {
+  const url = useSelector(getUrl())
   const dispatch = useDispatch();
   const favorite = useSelector(getFavoriteById(_id));
   const size = feature.reduce((sizes, item) => {
@@ -29,7 +31,7 @@ const ProductCard = ({
   }, []);
 
   const bgImage = {
-    backgroundImage: "url(" + process.env.REACT_APP_API_URL + img[0] + ")",
+    backgroundImage: "url(" + url + img[0] + ")",
   };
 
   return (

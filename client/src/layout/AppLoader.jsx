@@ -10,13 +10,16 @@ import { getFavoritesIsLoading, loadFavoritesList } from "../store/favorite";
 import { getProductsLoadingStatus, loadProductsList } from "../store/products";
 import { getSizesLoadingStatus, loadSizesList } from "../store/size";
 import { getTypesLoadingStatus, loadTypeList } from "../store/type";
+import {setUrlAction} from "../store/users";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const userId = getUserId();
-  console.log("userId", userId);
+  const url = window.location.protocol + '//' + window.location.hostname + '/'
+
 
   useEffect(() => {
+    dispatch(setUrlAction(url))
     dispatch(loadProductsList());
     dispatch(loadTypeList());
     dispatch(loadColorsList());

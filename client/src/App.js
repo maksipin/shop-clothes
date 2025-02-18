@@ -4,7 +4,6 @@ import NavBar from "./components/NavBar/NavBar";
 import AppLoader from "./layout/AppLoader";
 
 function App() {
-  console.log("App main render");
   return (
     <div className="relative flex flex-col min-h-screen ">
       <NavBar />

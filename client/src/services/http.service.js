@@ -4,8 +4,10 @@ import localStorageService from "./localStorage.service";
 import { toast } from "react-toastify";
 import authService from "./auth.service";
 
+const url = window.location.protocol + '//' + window.location.hostname + '/api'
+
 const http = axios.create({
-  baseURL: configFile.apiEndpoint,
+  baseURL: url,
 });
 
 http.interceptors.request.use(

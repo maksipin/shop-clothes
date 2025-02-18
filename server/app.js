@@ -19,7 +19,7 @@ app.use(fileUpload({}));
 app.use("/api", routes);
 
 // port from config
-const PORT = config.get("port") ?? 8080;
+const PORT = config.get("port") ?? 80;
 
 // if (process.env.NODE_ENV === "production") {
 //   console.log("production");

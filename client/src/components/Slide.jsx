@@ -1,13 +1,17 @@
 import React from "react";
+import {useLocation} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getUrl} from "../store/users";
 
 const Slide = () => {
+    const url = useSelector(getUrl())
   return (
     <>
       <div className="m-auto flex justify-center max-h-600 sm:pt-14 ">
         <img
           className="object-cover"
           src={
-            process.env.REACT_APP_API_URL +
+              url +
             "1c343fc7-9b16-486a-85b6-a67bf13381a0.jpg"
           }
           alt=""

@@ -19,8 +19,10 @@ import {
   getProductsLoadingStatus,
   loadProductsList,
 } from "../../store/products";
+import {getUrl} from "../../store/users";
 
 const EditProduct = () => {
+  const url = useSelector(getUrl())
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoadingTypes = useSelector(getTypesLoadingStatus());
@@ -183,7 +185,7 @@ const EditProduct = () => {
           <div className="relative">
             <img
               className="h-96  shadow-md m-1"
-              src={process.env.REACT_APP_API_URL + item}
+              src={url + item}
               alt=""
             />
             <XMarkIcon

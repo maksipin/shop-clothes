@@ -1,5 +1,7 @@
 import React from "react";
 import InputInfo from "./form/inputInfo";
+import {useSelector} from "react-redux";
+import {getUrl} from "../store/users";
 
 const CartItem = ({
   _id,
@@ -12,8 +14,9 @@ const CartItem = ({
   onBlur,
   remove,
 }) => {
+  const url = useSelector(getUrl())
   const bgImage = {
-    backgroundImage: "url(" + process.env.REACT_APP_API_URL + img + ")",
+    backgroundImage: "url(" + url + img + ")",
   };
 
   const onChangeQuantity = ({ target }) => {

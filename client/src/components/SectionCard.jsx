@@ -1,12 +1,15 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import { NavLink } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getUrl} from "../store/users";
 
 const SectionCard = ({ to, img, description, title }) => {
   const { ref, inView, entry } = useInView({
     /* Optional options */
     threshold: 1,
   });
+  const url = useSelector(getUrl())
   return (
     <div
       ref={ref}
@@ -18,7 +21,7 @@ const SectionCard = ({ to, img, description, title }) => {
           {/* card */}
           <img
             className="h-[100%] w-full object-cover group-hover:scale-125 duration-700"
-            src={`${process.env.REACT_APP_API_URL + img}`}
+            src={`${url + img}`}
             alt=""
           />
           <div
